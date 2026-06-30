@@ -1,0 +1,72 @@
+# ============================================================
+# 智能在线考试系统 - 核心配置文件
+# ============================================================
+
+spring:
+  profiles:
+    active: dev
+
+  # Jackson序列化配置
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+    default-property-inclusion: non_null
+
+# MyBatis-Plus配置
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/**/*.xml
+  type-aliases-package: com.smartexam.module.*.entity
+  global-config:
+    db-config:
+      id-type: auto
+      logic-delete-field: deleted
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+# Sa-Token配置
+sa-token:
+  token-name: Authorization
+  token-prefix: Bearer
+  timeout: 86400
+  active-timeout: 7200
+  is-concurrent: true
+  is-share: true
+  token-style: uuid
+  is-log: false
+
+# SpringDoc/Swagger配置
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    tags-sorter: alpha
+    operations-sorter: alpha
+  group-configs:
+    - group: '认证模块'
+      paths-to-match: /api/auth/**
+    - group: '用户模块'
+      paths-to-match: /api/users/**
+    - group: '题库模块'
+      paths-to-match: /api/questions/**
+    - group: '试卷模块'
+      paths-to-match: /api/papers/**
+    - group: '考试模块'
+      paths-to-match: /api/exam/**
+    - group: '阅卷模块'
+      paths-to-match: /api/grading/**
+    - group: '统计模块'
+      paths-to-match: /api/stats/**
+    - group: '字典模块'
+      paths-to-match: /api/dicts/**
+
+# 日志配置
+logging:
+  level:
+    com.smartexam: debug
+    org.springframework.web: info
+  pattern:
+    dateformat: yyyy-MM-dd HH:mm:ss.SSS

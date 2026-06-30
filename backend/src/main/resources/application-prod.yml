@@ -1,0 +1,61 @@
+# ============================================================
+# 生产环境配置
+# ============================================================
+
+server:
+  port: 8080
+  servlet:
+    context-path: /
+
+spring:
+  # 数据库配置(主从)
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:3306}/smart_exam?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=Asia/Shanghai
+    username: ${DB_USERNAME:smart_exam}
+    password: ${DB_PASSWORD:}
+
+  # Redis配置(哨兵模式)
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+      password: ${REDIS_PASSWORD:}
+      database: 0
+      timeout: 10000ms
+      lettuce:
+        pool:
+          max-active: 16
+          max-idle: 8
+          min-idle: 2
+          max-wait: -1ms
+
+# 通义千问AI配置
+ali:
+  qwen:
+    api-key: ${QWEN_API_KEY:}
+    base-url: https://dashscope.aliyuncs.com/api/v1
+    model: qwen-plus
+    timeout: 15000
+    max-retries: 2
+
+# 文件上传配置
+file:
+  upload:
+    path: /data/smart-exam/uploads
+    max-size: 10MB
+    allowed-types: xlsx,xls
+
+# 草稿配置
+draft:
+  redis:
+    prefix: exam:draft:
+    ttl: 86400
+
+# 日志配置
+logging:
+  level:
+    com.smartexam: info
+    org.springframework.web: warn
+  file:
+    name: /data/smart-exam/logs/app.log
