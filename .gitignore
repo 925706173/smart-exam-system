@@ -1,0 +1,50 @@
+# 编译产物
+backend/target/
+frontend/dist/
+frontend/node_modules/
+
+# IDE 文件
+.idea/
+.vscode/
+*.iml
+*.ipr
+*.iws
+
+# 日志文件
+*.log
+
+# 系统文件
+.DS_Store
+Thumbs.db
+
+# 环境配置文件（包含敏感信息）
+.env
+.env.local
+.env.*.local
+
+# 上传文件目录
+uploads/
+
+# 测试文件
+test_questions_import.xlsx
+
+# Maven
+.mvn/
+mvnw
+mvnw.cmd
+
+# Gradle
+.gradle/
+build/
+
+# Node
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# 其他
+*.swp
+*.swo
+*~
+.cache/
